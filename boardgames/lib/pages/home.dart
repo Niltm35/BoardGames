@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:animate_do/animate_do.dart';
+import 'package:ff_navigation_bar/ff_navigation_bar.dart';
+import 'package:anim_search_bar/anim_search_bar.dart';
+
 import 'package:boardgames/pages/user.dart';
 import 'package:boardgames/pages/notifications.dart';
-import 'package:animate_do/animate_do.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -11,12 +14,13 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
+  TextEditingController textController = TextEditingController();
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[
     Text('Home'),
+    Text('Notifications'),
     MyHomePage(),
     SettingsTwoPage(),
-    Text('Settings'),
   ];
 
   void _OnItemTap(int index) {
@@ -29,54 +33,73 @@ class _Home extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 40, 34, 34),
+        backgroundColor: Color.fromARGB(255, 26, 26, 26),
         centerTitle: true,
         leading: (IconButton(
           icon: FadeInRight(
               delay: Duration(milliseconds: 700),
-              child: FaIcon(FontAwesomeIcons.gripLines)),
+              child: FaIcon(
+                Icons.menu,
+                size: 30,
+                color: Colors.deepPurpleAccent,
+              )),
           onPressed: () {
             Navigator.push(context,
                 CupertinoPageRoute(builder: (BuildContext context) => Home()));
           },
         )),
         title: Text(
-          'HOME PAGE',
-          style: TextStyle(color: Colors.white),
+          'BOARDGAMES',
+          style: TextStyle(color: Colors.deepPurpleAccent),
         ),
-        bottom: PreferredSize(
-            child: Container(
-              color: Colors.white,
-              height: 1.0,
-            ),
-            preferredSize: Size.fromHeight(4.0)),
+        actions: <Widget>[
+          AnimSearchBar(
+            width: 400,
+            textController: textController,
+            onSuffixTap: () {
+              setState(() {
+                textController.clear();
+              });
+            },
+          ),
+        ],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       backgroundColor: Color.fromARGB(255, 40, 34, 34),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              title: Text('Home'),
-              icon: FaIcon(
-                Icons.home,
-                color: Colors.white,
-                size: 30,
-              ),
-              backgroundColor: Color.fromARGB(255, 26, 26, 26)),
-          BottomNavigationBarItem(
-              title: Text('Notifications'),
-              icon: FaIcon(Icons.notifications, size: 30, color: Colors.white)),
-          BottomNavigationBarItem(
-              title: Text('User'),
-              icon: FaIcon(FontAwesomeIcons.solidUser, color: Colors.white)),
-          BottomNavigationBarItem(
-              title: Text('Settings'),
-              icon: FaIcon(Icons.settings, size: 30, color: Colors.white)),
+      bottomNavigationBar: FFNavigationBar(
+        theme: FFNavigationBarTheme(
+          barBackgroundColor: Color.fromARGB(255, 26, 26, 26),
+          selectedItemBorderColor: Colors.deepPurpleAccent,
+          selectedItemBackgroundColor: Colors.deepPurpleAccent,
+          selectedItemIconColor: Color.fromARGB(255, 26, 26, 26),
+          selectedItemLabelColor: Colors.deepPurpleAccent,
+        ),
+        selectedIndex: _selectedIndex,
+        onSelectTab: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        items: [
+          FFNavigationBarItem(
+            iconData: Icons.home,
+            label: 'Home',
+          ),
+          FFNavigationBarItem(
+            iconData: Icons.notifications,
+            label: 'Notifications',
+          ),
+          FFNavigationBarItem(
+            iconData: FontAwesomeIcons.solidUser,
+            label: 'User',
+          ),
+          FFNavigationBarItem(
+            iconData: Icons.settings,
+            label: 'Settings',
+          ),
         ],
-        currentIndex: _selectedIndex,
-        onTap: _OnItemTap,
       ),
     );
   }
