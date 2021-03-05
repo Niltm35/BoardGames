@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
-import 'package:expansion_card/expansion_card.dart';
 
 import 'package:boardgames/pages/user.dart';
 import 'package:boardgames/pages/notifications.dart';
+import 'package:boardgames/pages/cards/cards.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class _Home extends State<Home> {
   TextEditingController textController = TextEditingController();
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[
-    Text('Home'),
+    HomeCards(),
     Text('Notifications'),
     MyHomePage(),
     SettingsTwoPage(),
@@ -65,11 +65,8 @@ class _Home extends State<Home> {
           ),
         ],
       ),
-      body: ListView(
-        children: <Widget>[
-          Card1(),
-          Card2(),
-        ],
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
       backgroundColor: Color.fromARGB(255, 40, 34, 34),
       bottomNavigationBar: FFNavigationBar(
@@ -109,78 +106,15 @@ class _Home extends State<Home> {
   }
 }
 
-class Card1 extends StatelessWidget {
+class HomeCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: ExpansionCard(
-        borderRadius: 20,
-        background: Image.asset("assets/virus.jpg", fit: BoxFit.cover),
-        title: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                "VIRUS! (2015)",
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                ),
-              ),
-              Text(
-                "Keep your body safe from viruses while infecting your rivals.",
-                style: TextStyle(fontSize: 15, color: Colors.white),
-              ),
-            ],
-          ),
-        ),
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 7),
-            child: Text("Content goes over here !",
-                style: TextStyle(fontSize: 15, color: Colors.white)),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class Card2 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: ExpansionCard(
-        borderRadius: 20,
-        background: Image.asset("assets/monopoly.jpg", fit: BoxFit.cover),
-        title: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                "Monopoly City (2009)",
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                ),
-              ),
-              Text(
-                "Buy properties, trade for sets, build houses, and run everyone else out of the game.",
-                style: TextStyle(fontSize: 15, color: Colors.white),
-              ),
-            ],
-          ),
-        ),
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 7),
-            child: Text("Content goes over here !",
-                style: TextStyle(fontSize: 15, color: Colors.white)),
-          )
-        ],
-      ),
+    return Scaffold(
+      backgroundColor: Color.fromARGB(255, 40, 34, 34),
+      body: Center(
+          child: ListView(
+        children: <Widget>[Card1(), Card2(), Card3()],
+      )),
     );
   }
 }
