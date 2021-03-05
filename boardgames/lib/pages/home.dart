@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
+import 'package:expansion_card/expansion_card.dart';
 
 import 'package:boardgames/pages/user.dart';
 import 'package:boardgames/pages/notifications.dart';
@@ -64,8 +65,11 @@ class _Home extends State<Home> {
           ),
         ],
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      body: ListView(
+        children: <Widget>[
+          Card1(),
+          Card2(),
+        ],
       ),
       backgroundColor: Color.fromARGB(255, 40, 34, 34),
       bottomNavigationBar: FFNavigationBar(
@@ -99,6 +103,82 @@ class _Home extends State<Home> {
             iconData: Icons.settings,
             label: 'Settings',
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class Card1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: ExpansionCard(
+        borderRadius: 20,
+        background: Image.asset("assets/virus.jpg", fit: BoxFit.cover),
+        title: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "VIRUS! (2015)",
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                "Keep your body safe from viruses while infecting your rivals.",
+                style: TextStyle(fontSize: 15, color: Colors.white),
+              ),
+            ],
+          ),
+        ),
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 7),
+            child: Text("Content goes over here !",
+                style: TextStyle(fontSize: 15, color: Colors.white)),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class Card2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: ExpansionCard(
+        borderRadius: 20,
+        background: Image.asset("assets/monopoly.jpg", fit: BoxFit.cover),
+        title: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Monopoly City (2009)",
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                "Buy properties, trade for sets, build houses, and run everyone else out of the game.",
+                style: TextStyle(fontSize: 15, color: Colors.white),
+              ),
+            ],
+          ),
+        ),
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 7),
+            child: Text("Content goes over here !",
+                style: TextStyle(fontSize: 15, color: Colors.white)),
+          )
         ],
       ),
     );
