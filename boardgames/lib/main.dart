@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 
-import 'package:boardgames/pages/home.dart';
+import 'package:boardgames/login.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
             height: 3),
       ),
       seconds: 2,
-      navigateAfterSeconds: Home(),
+      navigateAfterSeconds: LoginScreen(),
       image: new Image.asset('assets/loading.gif'),
       backgroundColor: Color.fromARGB(255, 19, 19, 19),
       styleTextUnderTheLoader: new TextStyle(),
