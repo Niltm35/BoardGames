@@ -90,15 +90,15 @@ class _Home extends State<Home> {
           ),
           FFNavigationBarItem(
             iconData: Icons.notifications,
-            label: 'Notifications',
+            label: 'Notificaciones',
           ),
           FFNavigationBarItem(
             iconData: FontAwesomeIcons.solidUser,
-            label: 'User',
+            label: 'Usuario',
           ),
           FFNavigationBarItem(
             iconData: Icons.settings,
-            label: 'Settings',
+            label: 'Configuración',
           ),
         ],
       ),

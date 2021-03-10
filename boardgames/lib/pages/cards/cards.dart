@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'cardmod.dart';
 
+import 'package:boardgames/pages/game.dart';
+
 class Card1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class Card1 extends StatelessWidget {
                 ),
               ),
               Text(
-                "Keep your body safe from viruses while infecting your rivals.",
+                "Mantén tu cuerpo a salvo de virus mientras infecta a tus rivales.",
                 style: TextStyle(fontSize: 15, color: Colors.white),
               ),
             ],
@@ -30,9 +32,7 @@ class Card1 extends StatelessWidget {
         ),
         children: <Widget>[
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 7),
-            child: Text("Content goes over here !",
-                style: TextStyle(fontSize: 15, color: Colors.white)),
+            child: Game(),
           )
         ],
       ),
@@ -60,7 +60,7 @@ class Card2 extends StatelessWidget {
                 ),
               ),
               Text(
-                "Buy properties, trade for sets, build houses, and run everyone else out of the game.",
+                "Compra propiedades, intercambia conjuntos, construye casas y deja fuera del juego a todos los demás.",
                 style: TextStyle(fontSize: 15, color: Colors.white),
               ),
             ],
@@ -91,14 +91,14 @@ class Card3 extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                "Catan (1995)",
+                "Catán (1995)",
                 style: TextStyle(
                   fontSize: 25,
                   color: Colors.white,
                 ),
               ),
               Text(
-                "Collect and trade resources to build up the island of Catan in this modern classic.",
+                "Recolecta e intercambia recursos para construir la isla de Catán en este clásico moderno.",
                 style: TextStyle(fontSize: 15, color: Colors.white),
               ),
             ],

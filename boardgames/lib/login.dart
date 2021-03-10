@@ -16,10 +16,10 @@ class LoginScreen extends StatelessWidget {
     print('Name: ${data.name}, Password: ${data.password}');
     return Future.delayed(loginTime).then((_) {
       if (!users.containsKey(data.name)) {
-        return 'Username not exists';
+        return 'Usuario no valido';
       }
       if (users[data.name] != data.password) {
-        return 'Password does not match';
+        return 'La contraseña no coincide';
       }
       return null;
     });
@@ -29,7 +29,7 @@ class LoginScreen extends StatelessWidget {
     print('Name: $name');
     return Future.delayed(loginTime).then((_) {
       if (!users.containsKey(name)) {
-        return 'Username not exists';
+        return 'Usuario no valido';
       }
       return null;
     });
