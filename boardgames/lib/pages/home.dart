@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:animate_do/animate_do.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 
-import 'package:boardgames/pages/user.dart';
+import 'package:boardgames/pages/user/user.dart';
 import 'package:boardgames/pages/notifications.dart';
-import 'package:boardgames/pages/cards/cards.dart';
+import 'package:boardgames/pages/cards/cardmod.dart';
+import 'package:boardgames/pages/game.dart';
+import 'package:boardgames/api/getRoutes.dart';
+import 'package:boardgames/api/apiGame.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -18,9 +20,8 @@ class _Home extends State<Home> {
   TextEditingController textController = TextEditingController();
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[
-    HomeCards(),
-    Text('Notifications'),
-    MyHomePage(),
+    ListaGames(),
+    UserPage(),
     SettingsTwoPage(),
   ];
 
@@ -36,19 +37,6 @@ class _Home extends State<Home> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 26, 26, 26),
         centerTitle: true,
-        leading: (IconButton(
-          icon: FadeInRight(
-              delay: Duration(milliseconds: 700),
-              child: FaIcon(
-                Icons.menu,
-                size: 30,
-                color: Colors.deepPurpleAccent,
-              )),
-          onPressed: () {
-            Navigator.push(context,
-                CupertinoPageRoute(builder: (BuildContext context) => Home()));
-          },
-        )),
         title: Text(
           'BOARDGAMES',
           style: TextStyle(color: Colors.deepPurpleAccent),
@@ -64,6 +52,44 @@ class _Home extends State<Home> {
             },
           ),
         ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: <Color>[
+                Color.fromARGB(255, 100, 56, 156),
+                Colors.deepPurpleAccent
+              ])),
+              child: Container(
+                child: Column(
+                  children: <Widget>[
+                    Material(
+                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                      elevation: 40,
+                      child: Image.asset(
+                        'assets/logo.png',
+                        width: 100,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: Text('Categorias',
+                          style:
+                              TextStyle(color: Colors.white, fontSize: 25.0)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            CustomListTitle('Dados'),
+            CustomListTitle('Fichas'),
+            CustomListTitle('Cartas'),
+            CustomListTitle('Rol'),
+            CustomListTitle('Tablero'),
+          ],
+        ),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -89,10 +115,6 @@ class _Home extends State<Home> {
             label: 'Home',
           ),
           FFNavigationBarItem(
-            iconData: Icons.notifications,
-            label: 'Notificaciones',
-          ),
-          FFNavigationBarItem(
             iconData: FontAwesomeIcons.solidUser,
             label: 'Usuario',
           ),
@@ -106,15 +128,139 @@ class _Home extends State<Home> {
   }
 }
 
-class HomeCards extends StatelessWidget {
+class CustomListTitle extends StatelessWidget {
+  String text;
+  CustomListTitle(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
+        child: Container(
+            decoration: BoxDecoration(
+              border: Border(bottom: BorderSide(color: Colors.grey.shade400)),
+            ),
+            child: InkWell(
+                splashColor: Colors.deepPurpleAccent,
+                onTap: () => {Navigator.pop(context)},
+                child: Container(
+                  height: 60,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Icon(Icons.label_important),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(text, style: TextStyle(fontSize: 20)),
+                          ),
+                        ],
+                      ),
+                      Icon(Icons.arrow_right)
+                    ],
+                  ),
+                ))));
+  }
+}
+
+class ListaGames extends StatefulWidget {
+  @override
+  _ListaGames createState() => _ListaGames();
+}
+
+class _ListaGames extends State<ListaGames> with TickerProviderStateMixin {
+  List<ApiGame> data = List();
+  List<ApiGame> data_dados = List();
+  List<ApiGame> data_fichas = List();
+  List<ApiGame> data_cartas = List();
+  List<ApiGame> data_rol = List();
+  List<ApiGame> data_tablero = List();
+  Api api = Api();
+
+  Future _getGames() async {
+    data = await api.getRoutes();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getGames();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 40, 34, 34),
-      body: Center(
-          child: ListView(
-        children: <Widget>[Card1(), Card2(), Card3()],
-      )),
+      body: ListView.builder(
+        itemCount: data.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+              margin: EdgeInsets.only(top: 2),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(color: Colors.deepPurpleAccent, spreadRadius: 1),
+                  ],
+                  image: DecorationImage(
+                    image: AssetImage("assets/" + data[index].photo),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      width: 342,
+                      height: 120,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 10, left: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              data[index].nomGame,
+                              style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(
+                              data[index].descGame,
+                              style:
+                                  TextStyle(fontSize: 15, color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 15,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Game(data[index]),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

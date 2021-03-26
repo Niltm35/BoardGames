@@ -2,15 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+import 'package:boardgames/pages/user/qrcode.dart';
+
+class UserPage extends StatefulWidget {
+  UserPage({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  User createState() => User();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class User extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: profile());
@@ -25,18 +27,18 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-                image: DecorationImage(
-              image: NetworkImage(
-                  "https://images.tedium.co/2017/03/0322_purple.jpg"),
-              fit: BoxFit.cover,
-            )),
+                gradient: LinearGradient(colors: <Color>[
+              Color.fromARGB(255, 100, 56, 156),
+              Colors.deepPurpleAccent
+            ])),
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: height / 1.3,
+              // color: Colors.amber,
+              height: height / 1.4,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Color.fromARGB(255, 40, 34, 34),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40.0),
                   topRight: Radius.circular(40.0),
@@ -45,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Positioned(
-            top: height / 7.5,
+            top: height / 22.5,
             child: Column(
               children: <Widget>[
                 Container(
@@ -58,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           fit: BoxFit.cover),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black54,
+                          color: Colors.white,
                           blurRadius: 5.0,
                           spreadRadius: 2.0,
                           offset: Offset(0, 1),
@@ -70,43 +72,29 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(
                   height: 10,
                 ),
-                Container(
-                  child: Text(
-                    'Oriol Molina',
-                    style: TextStyle(fontSize: 30, fontFamily: 'OpenSans'),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  child: Text(
-                    'Programmer',
-                    style: TextStyle(fontSize: 20, color: Colors.black45),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
+                Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: Container(
                     child: Text(
-                  'Welcome to the page of Oriol Molina',
-                  style: TextStyle(
-                    fontSize: 17,
+                      'Oriol Molina',
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontFamily: 'OpenSans',
+                          color: Colors.white),
+                    ),
                   ),
-                )),
+                ),
                 SizedBox(
                   height: 10,
                 ),
                 Row(
                   children: <Widget>[
                     SizedBox(
-                      height: height / 16,
-                      width: width / 4,
-                      child: FlatButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50)),
-                        color: Colors.deepPurple,
+                      height: height / 16.5,
+                      width: width / 3.5,
+                      child: OutlineButton(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                        color: Colors.white,
                         onPressed: () {},
                         child: Text(
                           'Contact',
@@ -115,19 +103,34 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     SizedBox(
-                      width: 20,
-                    ),
-                    SizedBox(
-                      width: width / 4,
+                      width: width / 3.5,
                       height: height / 16.5,
                       child: OutlineButton(
-                        borderSide:
-                            BorderSide(color: Colors.deepPurple, width: 2.0),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0)),
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
                         onPressed: () {},
-                        child: Text('Message'),
+                        child: Text(
+                          'Message',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
+                    ),
+                    SizedBox(
+                      width: width / 3.5,
+                      height: height / 16.5,
+                      child: OutlineButton(
+                          borderSide:
+                              BorderSide(color: Colors.white, width: 1.0),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (BuildContext context) =>
+                                        QRcode()));
+                          },
+                          child: Text(
+                            'QR',
+                            style: TextStyle(color: Colors.white),
+                          )),
                     ),
                   ],
                 ),

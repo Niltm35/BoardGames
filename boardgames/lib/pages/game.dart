@@ -1,68 +1,126 @@
+import 'package:boardgames/api/apiGame.dart';
 import 'package:flutter/material.dart';
-import 'package:page_indicator/page_indicator.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class Game extends StatefulWidget {
-  Game({Key key, this.title}) : super(key: key);
-  final String title;
+import 'package:boardgames/pages/Review.dart';
 
-  @override
-  _Game createState() => _Game();
-}
+class Game extends StatelessWidget {
+  Game(this.data);
 
-class _Game extends State<Game> {
-  PageController controller;
+  final ApiGame data;
 
-  GlobalKey<PageContainerState> key = GlobalKey();
-
-  @override
-  void initState() {
-    super.initState();
-    controller = PageController();
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  int counter = 0;
+  TextEditingController textController = TextEditingController();
+  int pageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 26, 26, 26),
       appBar: AppBar(
-        title: Text(widget.title),
+        backgroundColor: Color.fromARGB(255, 26, 26, 26),
+        centerTitle: true,
+        // leading: (IconButton(
+        //   icon: (FaIcon(
+        //     Icons.arrow_back,
+        //     size: 30,
+        //     color: Colors.deepPurpleAccent,
+        //   )),
+        //   onPressed: () {},
+        // )),
       ),
-      body: Container(
-        color: Colors.pink,
-        child: Container(
-          height: 120.0,
-          child: PageIndicatorContainer(
-            key: key,
-            child: PageView(
-              children: <Widget>[
-                Text('1'),
-                Text('2'),
-                Text('3'),
-                Text('4'),
-              ],
-              controller: controller,
-              reverse: true,
-            ),
-            align: IndicatorAlign.bottom,
-            length: 4,
-            indicatorSpace: 10.0,
-          ),
-        ),
+      body: new Stack(
+        children: <Widget>[
+          Positioned(
+              child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 25,
+              ),
+              Container(
+                child: Image.asset(
+                  "assets/" + data.photo,
+                  fit: BoxFit.cover,
+                  height: 120,
+                  width: 600,
+                ),
+              ),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(20, 25, 0, 0),
+                    child: Text(
+                      data.nomGame,
+                      style: TextStyle(color: Colors.white, fontSize: 40),
+                    ),
+                  )),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(20, 5, 0, 0),
+                    child: Text(
+                      data.descGame,
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  )),
+              Container(
+                  padding: EdgeInsets.fromLTRB(20, 15, 20, 0),
+                  child: Table(
+                    defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                    border: TableBorder(
+                        top: BorderSide(
+                            color: Colors.white, style: BorderStyle.solid),
+                        verticalInside: BorderSide(
+                            color: Colors.white, style: BorderStyle.solid)),
+                    children: [
+                      TableRow(children: [
+                        Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              height: 50,
+                              padding: EdgeInsets.fromLTRB(0, 13, 0, 0),
+                              child: Text(
+                                data.playerGame,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                            )),
+                        Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              child: Text(
+                                data.timeGame,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                            )),
+                        Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              child: Text(
+                                data.ageGame,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                            )),
+                      ])
+                    ],
+                  )),
+            ],
+          ))
+        ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.refresh),
-        tooltip: "force refresh indicator",
-        onPressed: () {
-          key.currentState.forceRefreshState();
-        },
-      ),
+          child: FaIcon(Icons.add),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Review(),
+              ),
+            );
+          },
+          backgroundColor: Colors.deepPurpleAccent),
     );
   }
 }

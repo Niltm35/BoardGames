@@ -3,9 +3,12 @@ class ApiUser {
   String email;
   String password;
 
-  ApiUser(name, email, password) {
-    this.name = name;
-    this.email = email;
-    this.password = password;
+  static ApiUser fromJson(Map<String, dynamic> json) {
+    ApiUser user = ApiUser();
+    user.name = json["name"];
+    user.email = json["email"];
+    user.password = json["password"];
+
+    return user;
   }
 }

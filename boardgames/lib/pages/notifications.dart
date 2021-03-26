@@ -1,3 +1,4 @@
+import 'package:boardgames/pages/LogIn/login.dart';
 import 'package:flutter/material.dart';
 
 class SettingsTwoPage extends StatelessWidget {
@@ -101,7 +102,13 @@ class SettingsTwoPage extends StatelessWidget {
                   title: Text(
                     "Logout",
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => LoginScreen()),
+                        ModalRoute.withName('/'));
+                  },
                 ),
               ],
             ),
