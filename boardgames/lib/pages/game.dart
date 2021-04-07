@@ -20,14 +20,6 @@ class Game extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 26, 26, 26),
         centerTitle: true,
-        // leading: (IconButton(
-        //   icon: (FaIcon(
-        //     Icons.arrow_back,
-        //     size: 30,
-        //     color: Colors.deepPurpleAccent,
-        //   )),
-        //   onPressed: () {},
-        // )),
       ),
       body: new Stack(
         children: <Widget>[
@@ -50,7 +42,7 @@ class Game extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.fromLTRB(20, 25, 0, 0),
                     child: Text(
-                      data.nomGame,
+                      data.nomGame + '  ★ ' + data.puntuacion.toString(),
                       style: TextStyle(color: Colors.white, fontSize: 40),
                     ),
                   )),
@@ -64,48 +56,51 @@ class Game extends StatelessWidget {
                     ),
                   )),
               Container(
-                  padding: EdgeInsets.fromLTRB(20, 15, 20, 0),
-                  child: Table(
-                    defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                    border: TableBorder(
-                        top: BorderSide(
-                            color: Colors.white, style: BorderStyle.solid),
-                        verticalInside: BorderSide(
-                            color: Colors.white, style: BorderStyle.solid)),
-                    children: [
-                      TableRow(children: [
-                        Align(
-                            alignment: Alignment.center,
-                            child: Container(
-                              height: 50,
-                              padding: EdgeInsets.fromLTRB(0, 13, 0, 0),
-                              child: Text(
-                                data.playerGame,
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                            )),
-                        Align(
-                            alignment: Alignment.center,
-                            child: Container(
-                              child: Text(
-                                data.timeGame,
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                            )),
-                        Align(
-                            alignment: Alignment.center,
-                            child: Container(
-                              child: Text(
-                                data.ageGame,
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                            )),
-                      ])
-                    ],
-                  )),
+                padding: EdgeInsets.fromLTRB(20, 15, 20, 0),
+                child: Table(
+                  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                  border: TableBorder(
+                      top: BorderSide(
+                          color: Colors.deepPurpleAccent,
+                          style: BorderStyle.solid),
+                      verticalInside: BorderSide(
+                          color: Colors.deepPurpleAccent,
+                          style: BorderStyle.solid)),
+                  children: [
+                    TableRow(children: [
+                      Align(
+                          alignment: Alignment.center,
+                          child: Container(
+                            height: 50,
+                            padding: EdgeInsets.fromLTRB(0, 13, 0, 0),
+                            child: Text(
+                              data.playerGame,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          )),
+                      Align(
+                          alignment: Alignment.center,
+                          child: Container(
+                            child: Text(
+                              data.timeGame,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          )),
+                      Align(
+                          alignment: Alignment.center,
+                          child: Container(
+                            child: Text(
+                              data.ageGame,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          )),
+                    ])
+                  ],
+                ),
+              ),
             ],
           ))
         ],

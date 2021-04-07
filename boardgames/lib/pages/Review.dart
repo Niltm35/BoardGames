@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:boardgames/pages/game.dart';
 import 'package:boardgames/pages/home.dart';
 
 class Review extends StatefulWidget {
@@ -72,7 +71,7 @@ class _MyHomePageState extends State<Review> {
                       ),
                       Expanded(
                         child: Container(
-                          padding: new EdgeInsets.all(15.0),
+                          padding: new EdgeInsets.fromLTRB(30, 15, 0, 0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -82,7 +81,7 @@ class _MyHomePageState extends State<Review> {
                                 });
                               }, 10),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                                padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
                                 child: SizedBox(
                                     height: 30,
                                     width: 25,
@@ -128,9 +127,9 @@ class _Rating extends State<Rating> {
 
   Widget _buildRatingStar(int index) {
     if (index < _currentRating) {
-      return Icon(Icons.star, size: 35.0, color: Colors.white);
+      return Icon(Icons.star, size: 30.0, color: Colors.white);
     } else {
-      return Icon(Icons.star_border_outlined, size: 35.0, color: Colors.white);
+      return Icon(Icons.star_border_outlined, size: 30.0, color: Colors.white);
     }
   }
 

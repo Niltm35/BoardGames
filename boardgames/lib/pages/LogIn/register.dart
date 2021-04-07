@@ -1,20 +1,20 @@
 import 'dart:convert';
+import 'package:boardgames/pages/LogIn/login.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:boardgames/pages/home.dart';
 import 'package:boardgames/api/apiUser.dart';
-import 'package:boardgames/pages/LogIn/register.dart';
 
 String _email, _password;
 bool acces = false;
 
-class LoginScreen extends StatefulWidget {
+class RegisterScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterScreen createState() => _RegisterScreen();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreen extends State<RegisterScreen> {
   List<ApiUser> userApi;
 
   @override
@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Center(
               child: Container(
                 width: 400,
-                height: 400,
+                height: 470,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -54,6 +54,45 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: 140,
                         ),
                       ),
+                    ),
+                    Container(
+                      height: 10,
+                    ),
+                    Container(
+                      width: 250,
+                      child: Material(
+                          elevation: 5.0,
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          color: Colors.deepPurpleAccent,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Icon(Icons.person, color: Colors.white),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(10.0),
+                                      bottomRight: Radius.circular(10.0)),
+                                ),
+                                width: 200,
+                                height: 60,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    decoration: const InputDecoration(
+                                      hintText: 'Username',
+                                    ),
+                                    style: TextStyle(color: Colors.black),
+                                    onChanged: (val) => _email = val,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )),
                     ),
                     Container(
                       height: 10,
@@ -149,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10.0))),
                         child: Text(
-                          'Login',
+                          'Registrarse',
                           style: TextStyle(fontSize: 20.0),
                         ),
                       ),
@@ -161,7 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () => (Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => RegisterScreen()),
+                              builder: (context) => LoginScreen()),
                         )),
                         color: Color.fromARGB(255, 19, 19, 19),
                         textColor: Colors.white,
@@ -169,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10.0))),
                         child: Text(
-                          'Registrarse',
+                          'Login',
                           style: TextStyle(fontSize: 20.0),
                         ),
                       ),

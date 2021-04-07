@@ -6,10 +6,14 @@ import 'package:anim_search_bar/anim_search_bar.dart';
 
 import 'package:boardgames/pages/user/user.dart';
 import 'package:boardgames/pages/notifications.dart';
-import 'package:boardgames/pages/cards/cardmod.dart';
 import 'package:boardgames/pages/game.dart';
 import 'package:boardgames/api/getRoutes.dart';
 import 'package:boardgames/api/apiGame.dart';
+import 'package:boardgames/pages/categories/cartas.dart';
+import 'package:boardgames/pages/categories/dados.dart';
+import 'package:boardgames/pages/categories/fichas.dart';
+import 'package:boardgames/pages/categories/rol.dart';
+import 'package:boardgames/pages/categories/tablero.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -83,11 +87,11 @@ class _Home extends State<Home> {
                 ),
               ),
             ),
-            CustomListTitle('Dados'),
-            CustomListTitle('Fichas'),
-            CustomListTitle('Cartas'),
-            CustomListTitle('Rol'),
-            CustomListTitle('Tablero'),
+            CustomListTitle('Dados', 1, Dados()),
+            CustomListTitle('Fichas', 2, Fichas()),
+            CustomListTitle('Cartas', 3, Cartas()),
+            CustomListTitle('Rol', 4, Rol()),
+            CustomListTitle('Tablero', 5, Tablero()),
           ],
         ),
       ),
@@ -130,7 +134,10 @@ class _Home extends State<Home> {
 
 class CustomListTitle extends StatelessWidget {
   String text;
-  CustomListTitle(this.text);
+  int id;
+  Widget categoria;
+
+  CustomListTitle(this.text, this.id, this.categoria);
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +149,14 @@ class CustomListTitle extends StatelessWidget {
             ),
             child: InkWell(
                 splashColor: Colors.deepPurpleAccent,
-                onTap: () => {Navigator.pop(context)},
+                onTap: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => categoria,
+                        ),
+                      )
+                    },
                 child: Container(
                   height: 60,
                   child: Row(
@@ -171,16 +185,17 @@ class ListaGames extends StatefulWidget {
 
 class _ListaGames extends State<ListaGames> with TickerProviderStateMixin {
   List<ApiGame> data = List();
-  List<ApiGame> data_dados = List();
-  List<ApiGame> data_fichas = List();
-  List<ApiGame> data_cartas = List();
-  List<ApiGame> data_rol = List();
-  List<ApiGame> data_tablero = List();
+  List<ApiGame> dataNew = List();
+  int newValue = 0;
   Api api = Api();
 
   Future _getGames() async {
     data = await api.getRoutes();
     setState(() {});
+  }
+
+  void _callback(int value) {
+    newValue = value;
   }
 
   @override
@@ -216,7 +231,7 @@ class _ListaGames extends State<ListaGames> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                      width: 342,
+                      width: 343,
                       height: 120,
                       child: Padding(
                         padding: const EdgeInsets.only(top: 10, left: 10),
@@ -239,20 +254,30 @@ class _ListaGames extends State<ListaGames> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 15,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Game(data[index]),
+                    Column(
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(
+                            Icons.arrow_forward_ios,
+                            size: 15,
+                            color: Colors.white,
                           ),
-                        );
-                      },
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Game(data[index]),
+                              ),
+                            );
+                          },
+                        ),
+                        Text(''),
+                        Text(''),
+                        Text(
+                          '★' + data[index].puntuacion.toString(),
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        )
+                      ],
                     ),
                   ],
                 ),
