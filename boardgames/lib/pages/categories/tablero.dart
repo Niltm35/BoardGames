@@ -12,6 +12,10 @@ class Tablero extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 26, 26, 26),
         centerTitle: true,
+        title: Text(
+          'TABLERO',
+          style: TextStyle(color: Colors.deepPurpleAccent),
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.all(10.0),

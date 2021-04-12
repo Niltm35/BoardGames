@@ -36,12 +36,12 @@ class User extends State<UserPage> {
             alignment: Alignment.bottomCenter,
             child: Container(
               // color: Colors.amber,
-              height: height / 1.4,
+              height: height / 1.5,
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 40, 34, 34),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40.0),
-                  topRight: Radius.circular(40.0),
+                  topLeft: Radius.circular(20.0),
+                  topRight: Radius.circular(20.0),
                 ),
               ),
             ),
@@ -122,10 +122,11 @@ class User extends State<UserPage> {
                               BorderSide(color: Colors.white, width: 1.0),
                           onPressed: () {
                             Navigator.push(
-                                context,
-                                CupertinoPageRoute(
-                                    builder: (BuildContext context) =>
-                                        QRcode()));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => QRcode(),
+                              ),
+                            );
                           },
                           child: Text(
                             'QR',
@@ -134,6 +135,115 @@ class User extends State<UserPage> {
                     ),
                   ],
                 ),
+                Container(
+                  height: 25,
+                ),
+                Text(
+                  'Mis Reviews:',
+                  style: TextStyle(color: Colors.white, fontSize: 30),
+                ),
+                Container(
+                  height: 25,
+                ),
+                Container(
+                  height: 130,
+                  width: 380,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Color.fromARGB(255, 40, 34, 34),
+                    boxShadow: [
+                      BoxShadow(color: Colors.white, spreadRadius: 1),
+                    ],
+                    image: DecorationImage(
+                      image: AssetImage("assets/virus.jpg"),
+                      fit: BoxFit.cover,
+                      colorFilter: new ColorFilter.mode(
+                          Colors.black.withOpacity(0.7), BlendMode.dstATop),
+                    ),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        width: 380,
+                        height: 130,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10, left: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'VIRUS! (2015)',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 30),
+                              ),
+                              Text(
+                                'Virus me parece muy buen juego para jugarlo tanto en familia como con amigos, lo recomiendo.',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17),
+                              ),
+                              Text(
+                                '                                                         Puntuación: ★8',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 20,
+                ),
+                Container(
+                  height: 130,
+                  width: 380,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Color.fromARGB(255, 40, 34, 34),
+                    boxShadow: [
+                      BoxShadow(color: Colors.white, spreadRadius: 1),
+                    ],
+                    image: DecorationImage(
+                      image: AssetImage("assets/catan.jpg"),
+                      fit: BoxFit.cover,
+                      colorFilter: new ColorFilter.mode(
+                          Colors.black.withOpacity(0.7), BlendMode.dstATop),
+                    ),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        width: 380,
+                        height: 130,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10, left: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Catan (1995)',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 30),
+                              ),
+                              Text(
+                                'Juego muy recomendado para jugar contra amigos, pero ten cuidado que los puedes perder. La unica pega es muy largo',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17),
+                              ),
+                              Text(
+                                '                                                         Puntuación: ★7',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                )
               ],
             ),
           ),
