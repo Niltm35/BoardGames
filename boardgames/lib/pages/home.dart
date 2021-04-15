@@ -231,7 +231,7 @@ class _ListaGames extends State<ListaGames> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                      width: 343,
+                      width: 364,
                       height: 120,
                       child: Padding(
                         padding: const EdgeInsets.only(top: 10, left: 10),

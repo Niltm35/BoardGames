@@ -71,7 +71,7 @@ class _MyHomePageState extends State<Review> {
                       ),
                       Expanded(
                         child: Container(
-                          padding: new EdgeInsets.fromLTRB(30, 15, 0, 0),
+                          padding: new EdgeInsets.fromLTRB(45, 15, 0, 0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
