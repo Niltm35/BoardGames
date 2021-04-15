@@ -1,4 +1,6 @@
+import 'package:boardgames/pages/LogIn/login.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SettingsTwoPage extends StatelessWidget {
   static final String path = "lib/src/pages/settings/settings2.dart";
@@ -11,7 +13,7 @@ class SettingsTwoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 40, 34, 34),
       body: Theme(
         data: Theme.of(context).copyWith(
           brightness: Brightness.dark,
@@ -19,7 +21,7 @@ class SettingsTwoPage extends StatelessWidget {
         ),
         child: DefaultTextStyle(
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
           ),
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(32.0),
@@ -32,7 +34,7 @@ class SettingsTwoPage extends StatelessWidget {
                       width: 60,
                       height: 60,
                       decoration: BoxDecoration(
-                        color: Colors.black,
+                        color: Colors.white,
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           image: NetworkImage(
@@ -40,7 +42,7 @@ class SettingsTwoPage extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                         border: Border.all(
-                          color: Colors.black,
+                          color: Colors.white,
                           width: 2.0,
                         ),
                       ),
@@ -57,12 +59,6 @@ class SettingsTwoPage extends StatelessWidget {
                               fontSize: 20.0,
                             ),
                           ),
-                          Text(
-                            "Programmer",
-                            style: TextStyle(
-                              color: Colors.grey.shade600,
-                            ),
-                          ),
                         ],
                       ),
                     ),
@@ -70,26 +66,45 @@ class SettingsTwoPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20.0),
                 ListTile(
-                  title: Text(
-                    "Languages",
+                  leading: Icon(
+                    Icons.language,
+                    size: 30,
+                    color: Colors.white,
                   ),
-                  subtitle: Text(
-                    "English US",
-                    style: greyTExt,
+                  title: Text(
+                    "Idioma",
+                    style: TextStyle(color: Colors.white),
                   ),
                   trailing: Icon(
                     Icons.keyboard_arrow_right,
-                    color: Colors.grey.shade600,
+                    color: Colors.white,
                   ),
                   onTap: () {},
                 ),
                 ListTile(
-                  title: Text(
-                    "Profile Settings",
+                  leading: Icon(
+                    FontAwesomeIcons.solidMoon,
+                    color: Colors.white,
                   ),
-                  subtitle: Text(
-                    "Jane Doe",
-                    style: greyTExt,
+                  title: Text(
+                    "Dark Theme",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  trailing: Icon(
+                    FontAwesomeIcons.toggleOn,
+                    color: Colors.white,
+                    size: 40,
+                  ),
+                  onTap: () {},
+                ),
+                ListTile(
+                  leading: Icon(
+                    FontAwesomeIcons.infoCircle,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    "Información",
+                    style: TextStyle(color: Colors.white),
                   ),
                   trailing: Icon(
                     Icons.keyboard_arrow_right,
@@ -100,8 +115,15 @@ class SettingsTwoPage extends StatelessWidget {
                 ListTile(
                   title: Text(
                     "Logout",
+                    style: TextStyle(color: Colors.white),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => LoginScreen()),
+                        ModalRoute.withName('/'));
+                  },
                 ),
               ],
             ),
